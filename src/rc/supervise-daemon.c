@@ -877,6 +877,9 @@ int main(int argc, char **argv)
 		tty_fd = open("/dev/tty", O_RDWR);
 #endif
 		devnull_fd = open("/dev/null", O_RDWR);
+		dup2(devnull_fd, 0);
+		dup2(devnull_fd, 1);
+		dup2(devnull_fd, 2);
 		child_pid = fork();
 		if (child_pid == -1)
 			eerrorx("%s: fork: %s", applet, strerror(errno));
